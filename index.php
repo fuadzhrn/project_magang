@@ -1,62 +1,246 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Surat - LOGIN</title>
-
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/floating-labels/"> -->
+    <meta name="description" content="Sistem Manajemen Arsip Surat KOFIPINDO">
+    <meta name="author" content="Fuad, Hanum, Ayu">
+    <title>Arsip Surat KOFIPINDO - LOGIN</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0056b3 0%, #003d82 50%, #002554 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 450px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        animation: slideUp 0.5s ease-out;
+      }
+
+      .login-header {
+        background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .login-header img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+        filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+
+      .login-header h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      .login-header p {
+        font-size: 0.95rem;
+        opacity: 0.95;
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .login-body {
+        padding: 40px 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #0056b3;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+      }
+
+      .form-group.input-group-icon {
+        position: relative;
+      }
+
+      .form-group.input-group-icon i {
+        position: absolute;
+        right: 15px;
+        top: 43px;
+        color: #999;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        margin-right: 8px;
+      }
+
+      .checkbox-group label {
+        margin-bottom: 0;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: #666;
+        cursor: pointer;
+      }
+
+      .btn-login {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0, 86, 179, 0.3);
+      }
+
+      .btn-login:active {
+        transform: translateY(0);
+      }
+
+      .login-footer {
+        text-align: center;
+        color: #999;
+        font-size: 0.85rem;
+        padding: 0 30px 30px;
+      }
+
+      .login-footer p {
+        margin: 0;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 576px) {
+        .login-container {
+          max-width: 100%;
+        }
+
+        .login-header {
+          padding: 30px 20px;
+        }
+
+        .login-header h1 {
+          font-size: 1.5rem;
+        }
+
+        .login-body {
+          padding: 30px 20px;
+        }
+
+        .login-footer {
+          padding: 0 20px 20px;
         }
       }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="assets/css/floating-labels.css" rel="stylesheet">
   </head>
   <body>
-    <form class="form-signin" method="post" action="cek_login.php">
-  <div class="text-center mb-4">
-    <img class="mb-4" src="assets/LOGO PLN.png" alt="" width="100">
-    <h1 class="h3 mb-3 font-weight-normal">Login PLN Sulselrabar</h1>
-    <p>Silahkan Masukkan Username Dan Password Anda, Sebelum Masuk Ke Dalam Sistem PLN Sulselrabar</p>
-  </div>
+    <div class="login-container">
+      <div class="login-header">
+        <img src="assets/logo_hukum.png" alt="Logo Arsip Surat">
+        <h1>Arsip Surat KOFIPINDO</h1>
+        <p>Sistem Manajemen Arsip Surat</p>
+      </div>
 
-  <div class="form-label-group">
-    <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
-    <label for="username">Username</label>
-  </div>
+      <form class="login-body" method="post" action="cek_login.php">
+        <div class="form-group input-group-icon">
+          <label for="username">
+            <i class="fas fa-user"></i> Username
+          </label>
+          <input type="text" id="username" name="username" placeholder="Masukkan username Anda" required autofocus>
+        </div>
 
-  <div class="form-label-group">
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <label for="inputPassword">Password</label>
-  </div>
+        <div class="form-group input-group-icon">
+          <label for="password">
+            <i class="fas fa-lock"></i> Password
+          </label>
+          <input type="password" id="password" name="password" placeholder="Masukkan password Anda" required>
+        </div>
 
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted text-center">&copy; 2025 |  Fuad</p>
-</form>
-</body>
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember" name="remember" value="on">
+          <label for="remember">Ingat saya</label>
+        </div>
+
+        <button type="submit" class="btn-login">
+          <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <p>&copy; 2025 Arsip Surat KOFIPINDO. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">Dikembangkan oleh: Fuad, Hanum, Ayu</p>
+      </div>
+    </div>
+  </body>
 </html>

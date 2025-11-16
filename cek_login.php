@@ -19,21 +19,10 @@ $data = mysqli_fetch_array($login);
 if ($data) {
     $_SESSION['id_user'] = $data['id_user'];
     $_SESSION['username'] = $data['username'];
-    $_SESSION['role'] = $data['role']; // Menyimpan role di sesi
 
-    // Cek role user dan arahkan ke halaman sesuai
-    if ($data['role'] == 'admin') {
-        header('location: admin.php');
-        exit(); // Menghentikan script setelah redirect
-    } elseif ($data['role'] == 'user') {
-        header('location: user.php'); // Perbaikan lokasi file
-        exit();
-    } else {
-        echo "<script>
-                alert('Role tidak dikenali!');
-                document.location='index.php';
-              </script>";
-    }
+    // Redirect langsung ke halaman admin (arsip surat)
+    header('location: admin.php');
+    exit(); // Menghentikan script setelah redirect
 } else {
     echo "<script>
             alert('Maaf, Login GAGAL! Pastikan username dan password Anda benar.');

@@ -63,57 +63,101 @@ if(isset($_POST['bsimpan']))
 
 ?>
 
+<section class="pt-4">
+    <div class="mb-4">
+        <h2 class="mb-3">
+            <i class="fas fa-building"></i> Manajemen Data Departemen
+        </h2>
+        <p class="text-muted">Kelola semua data departemen organisasi Anda</p>
+    </div>
 
-<div class="card mt-3">
-  <div class="card-header bg-info text-white">
-    Form Data Departemen
-  </div>
-  <div class="card-body">
-  <form method="post" action="">
-  <div class="form-group">
-    <label for="nama_departemen">Nama_departemen</label>
-    <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" value="<?=@$vnama_departemen?>">
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #0056b3 0%, #004085 100%); color: white; font-weight: 600; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-plus-circle"></i> <?php echo (isset($_GET['hal']) && $_GET['hal'] == "edit") ? 'Edit' : 'Tambah'; ?> Departemen
+                </div>
+                <div class="card-body">
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label for="nama_departemen">
+                                <i class="fas fa-tag"></i> Nama Departemen <span style="color: red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" 
+                                   placeholder="Masukkan nama departemen (contoh: Bagian Keuangan, Bagian Operasional, dll)" 
+                                   value="<?=@$vnama_departemen?>" required>
+                            <small class="form-text text-muted">Isikan nama departemen dengan jelas agar mudah diidentifikasi</small>
+                        </div>
 
-  </div>
- 
-  
-  <button type="submit" name="bsimpan" class="btn btn-primary">Submit</button>
-  <button type="reset" name="bbatal" class="btn btn-danger">Batal</button>
-</form>
-  </div>
-</div>
+                        <div class="form-group mt-3">
+                            <button type="submit" name="bsimpan" class="btn btn-primary" style="min-width: 150px;">
+                                <i class="fas fa-save"></i> <?php echo (isset($_GET['hal']) && $_GET['hal'] == "edit") ? 'Perbarui' : 'Simpan'; ?>
+                            </button>
+                            <a href="?halaman=departemen" class="btn btn-secondary" style="min-width: 150px;">
+                                <i class="fas fa-times"></i> Batal
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-<div class="card mt-3">
-  <div class="card-header bg-info text-white">
-    Data Departemen
-  </div>
-  <div class="card-body">
-    <table class="table table-bordered table-hover table-striped">
-        <tr>
-            <th>No</th>
-            <th>Nama Departemen</th>
-            <th>Aksi</th>
-        </tr>
-        <?php
-        // Deklarasi variabel nomor urut
-        $no = 1;
-
-        // Ambil data dari database
-        $tampil = mysqli_query($koneksi, "SELECT * FROM tbl_departemen ORDER BY id_departemen DESC");
-        $no = 1;
-        while ($data = mysqli_fetch_array($tampil)) :
-        ?>
-        <tr>
-            <td><?= $no++ ?></td>
-            <td><?= htmlspecialchars($data['nama_departemen']) ?></td>
-            <td>
-                <!-- Tambahkan tombol aksi jika diperlukan -->
-                <a href="?halaman=departemen&hal=edit&id=<?= $data['id_departemen'] ?>" class="btn btn-success btn-sm">Edit</a>
-                <a href="?halaman=departemen&hal=hapus&id=<?= $data['id_departemen'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yankin ingin menghapus data ini?')">Hapus</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
-  </div>
-</div>
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #0056b3 0%, #004085 100%); color: white; font-weight: 600; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-list"></i> Daftar Departemen
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="8%"><i class="fas fa-hashtag"></i></th>
+                                    <th><i class="fas fa-folder"></i> Nama Departemen</th>
+                                    <th width="15%"><i class="fas fa-cogs"></i> Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $tampil = mysqli_query($koneksi, "SELECT * FROM tbl_departemen ORDER BY id_departemen DESC");
+                                $hasData = false;
+                                while ($data = mysqli_fetch_array($tampil)) :
+                                    $hasData = true;
+                                ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="badge badge-primary"><?= $no++ ?></span>
+                                    </td>
+                                    <td>
+                                        <strong><?= htmlspecialchars($data['nama_departemen']) ?></strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="?halaman=departemen&hal=edit&id=<?= $data['id_departemen'] ?>" 
+                                           class="btn btn-warning btn-sm" title="Edit">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <a href="?halaman=departemen&hal=hapus&id=<?= $data['id_departemen'] ?>" 
+                                           class="btn btn-danger btn-sm" 
+                                           onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" 
+                                           title="Hapus">
+                                            <i class="fas fa-trash-alt"></i> Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endwhile; 
+                                
+                                if (!$hasData) {
+                                    echo '<tr><td colspan="3" class="text-center text-muted py-4"><i class="fas fa-inbox"></i> Tidak ada data departemen</td></tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
